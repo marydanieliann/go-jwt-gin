@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	_ "github.com/go-redis/redis/v8"
 	"go-jwt/controllers"
 	"go-jwt/initializers"
 	"go-jwt/middleware"
@@ -20,6 +21,7 @@ func main() {
 	r := gin.Default()
 	r.POST("/signup", controllers.Signup)
 	r.POST("/login", controllers.Login)
+	r.GET("/logout", controllers.Logout)
 	r.GET("/validate", middleware.RequireAuth, controllers.Validate)
 	r.POST("/movie", controllers.CreateMovie)
 	r.GET("/movie/:id", controllers.GetMovieById)
